@@ -10,19 +10,21 @@ import UIKit
 
 class WWFoursquareService: NSObject {
     var llCoords: String
+    var coordinateComponent: String
+    var stringBase: String
+    
+    let foursquareBase = "https://api.foursquare.com/v2/venues/search?"
+    let foursquareClientIDComponent = "client_id=\(kFoursquareClientID)"
+    let foursquareClientSecretComponent = "client_secret=\(kFoursquareClientSecret)"
+    let foursquareVersionComponent = "v=\(kFoursquareVersionDate)"
     
     init(llCoords: String) {
         self.llCoords = llCoords
+        self.coordinateComponent =  "ll=\(llCoords)"
+        self.stringBase = "\(foursquareBase)\(foursquareClientIDComponent)&\(foursquareClientSecretComponent)&\(foursquareVersionComponent)&\(coordinateComponent)" //https://api.foursquare.com/v2/venues/search?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=YYYYMMDD&ll=40.7,-74
     }
     
     func foursquareVenuesMatchingSearchTerm(searchTerm: String) {
-        let foursquareBase = "https://api.foursquare.com/v2/venues/search?"
-        let foursquareClientIDComponent = "client_id=\(kFoursquareClientID)"
-        let foursquareClientSecretComponent = "client_secret=\(kFoursquareClientSecret)"
-        let foursquareVersionComponent = "v=\(kFoursquareVersionDate)"
-        let coordinateComponent = "ll=\(self.llCoords)"
-        let stringBase = "\(foursquareBase)\(foursquareClientIDComponent)&\(foursquareClientSecretComponent)&\(foursquareVersionComponent)&\(coordinateComponent)" //https://api.foursquare.com/v2/venues/search?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=YYYYMMDD&ll=40.7,-74
-        
         let fullString = "\(stringBase)&query=\(searchTerm)"
         if let createdURL = NSURL(string: fullString) {
             let request = NSURLRequest(URL:createdURL)
