@@ -12,6 +12,7 @@
 		64D859231CF3A56A007B5F13 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D858FD1CF3A54D007B5F13 /* ReactiveCocoa.framework */; };
 		64D859241CF3A56A007B5F13 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 64D858FD1CF3A54D007B5F13 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		64D859291CF3ABB1007B5F13 /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D859281CF3ABB1007B5F13 /* PrivateKeys.swift */; };
+		64D8592B1CF3AE0F007B5F13 /* WWFoursquareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D8592A1CF3AE0F007B5F13 /* WWFoursquareService.swift */; };
 		64EA3B8A1CF3952B0072B5BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA3B891CF3952B0072B5BB /* AppDelegate.swift */; };
 		64EA3B8C1CF3952B0072B5BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EA3B8B1CF3952B0072B5BB /* ViewController.swift */; };
 		64EA3B8F1CF3952B0072B5BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64EA3B8D1CF3952B0072B5BB /* Main.storyboard */; };
@@ -153,6 +154,7 @@
 		64D858EF1CF3A54D007B5F13 /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = ../../ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = "<group>"; };
 		64D859041CF3A550007B5F13 /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = ../../ReactiveCocoa/Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
 		64D859281CF3ABB1007B5F13 /* PrivateKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
+		64D8592A1CF3AE0F007B5F13 /* WWFoursquareService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WWFoursquareService.swift; sourceTree = "<group>"; };
 		64EA3B861CF3952B0072B5BB /* ReactiveCocoaSpike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveCocoaSpike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64EA3B891CF3952B0072B5BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64EA3B8B1CF3952B0072B5BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				64EA3B891CF3952B0072B5BB /* AppDelegate.swift */,
 				64EA3B8B1CF3952B0072B5BB /* ViewController.swift */,
 				64D859281CF3ABB1007B5F13 /* PrivateKeys.swift */,
+				64D8592A1CF3AE0F007B5F13 /* WWFoursquareService.swift */,
 				64EA3B8D1CF3952B0072B5BB /* Main.storyboard */,
 				64EA3B901CF3952B0072B5BB /* Assets.xcassets */,
 				64EA3B921CF3952B0072B5BB /* LaunchScreen.storyboard */,
@@ -420,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64D8592B1CF3AE0F007B5F13 /* WWFoursquareService.swift in Sources */,
 				64EA3B8C1CF3952B0072B5BB /* ViewController.swift in Sources */,
 				64EA3B8A1CF3952B0072B5BB /* AppDelegate.swift in Sources */,
 				64D859291CF3ABB1007B5F13 /* PrivateKeys.swift in Sources */,
