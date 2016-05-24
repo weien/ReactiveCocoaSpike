@@ -14,6 +14,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        var previousResults:Array<String> = [String]()
 
         let wwfss = WWFoursquareService(llCoords: "51.6,-0.1")
         
@@ -35,10 +36,18 @@ class ViewController: UIViewController {
             .map { (data, URLResponse) -> Array<String> in
                 return wwfss.venueNamesForResponseData(data)
             }
+            .filter { venues in
+                return venues != previousResults //don't show identical result again
+            }
             .observeOn(UIScheduler())
         
         searchResults.startWithNext { results in
             print("Search results: \(results)")
+            previousResults = results
+        }
+        
+        searchResults.startWithCompleted { results in
+            print("'Completed' event received: \(results)")
         }
     }
 
