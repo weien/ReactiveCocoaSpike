@@ -24,7 +24,13 @@ class ViewController: UIViewController {
         let searchResults = searchStrings
             .flatMap(.Latest) { (query: String) -> SignalProducer<(NSData, NSURLResponse), NSError> in
                 let urlRequest = wwfss.urlRequestForSearchTerm(query)
-                return NSURLSession.sharedSession().rac_dataWithRequest(urlRequest)
+                return NSURLSession.sharedSession()
+                    .rac_dataWithRequest(urlRequest)
+                    .retry(2)
+                    .flatMapError { error in
+                        print("Network request unsuccessful: \(error)")
+                        return SignalProducer.empty
+                    }
             }
             .map { (data, URLResponse) -> Array<String> in
                 return wwfss.venueNamesForResponseData(data)
