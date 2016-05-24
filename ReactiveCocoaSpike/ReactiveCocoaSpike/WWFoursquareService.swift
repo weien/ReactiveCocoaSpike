@@ -24,6 +24,29 @@ class WWFoursquareService: NSObject {
         self.stringBase = "\(foursquareBase)\(foursquareClientIDComponent)&\(foursquareClientSecretComponent)&\(foursquareVersionComponent)&\(coordinateComponent)" //https://api.foursquare.com/v2/venues/search?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=YYYYMMDD&ll=40.7,-74
     }
     
+    func urlRequestForSearchTerm(searchTerm: String) -> NSURLRequest {
+        let fullString = "\(self.stringBase)&query=\(searchTerm)"
+        let createdURL = NSURL(string: fullString)
+        return NSURLRequest(URL: createdURL!)
+    }
+    
+    func venueNamesForResponseData(data: NSData) -> Array<String> {
+        do {
+            if let foursquareObject = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.AllowFragments) as? NSDictionary {
+                if let foursquareVenues = foursquareObject["response"]?["venues"] {
+                    if let venueNames = foursquareVenues?.valueForKey("name") {
+                        return venueNames as! Array<String>
+                    }
+                }
+            }
+        } catch {
+            NSLog("Error serializing Foursquare data:\(error)")
+            return [String]()
+        }
+        return [String]()
+    }
+    
+    //No-RAC approach
     func foursquareVenuesMatchingSearchTerm(searchTerm: String) {
         let fullString = "\(stringBase)&query=\(searchTerm)"
         if let createdURL = NSURL(string: fullString) {

@@ -15,8 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let wwfss = WWFoursquareService(llCoords: "40.7,-74")
-        //wwfss.foursquareVenuesMatchingSearchTerm("pizza")
+        let wwfss = WWFoursquareService(llCoords: "51.6,-0.1")
         
         let searchStrings = self.searchTextField.rac_textSignal()
             .toSignalProducer()
@@ -24,24 +23,11 @@ class ViewController: UIViewController {
         
         let searchResults = searchStrings
             .flatMap(.Latest) { (query: String) -> SignalProducer<(NSData, NSURLResponse), NSError> in
-                let fullString = "\(wwfss.stringBase)&query=\(query)"
-                let createdURL = NSURL(string: fullString)
-                let URLRequest = NSURLRequest(URL: createdURL!)
-                return NSURLSession.sharedSession().rac_dataWithRequest(URLRequest)
+                let urlRequest = wwfss.urlRequestForSearchTerm(query)
+                return NSURLSession.sharedSession().rac_dataWithRequest(urlRequest)
             }
             .map { (data, URLResponse) -> Array<String> in
-                do {
-                    if let foursquareObject = try NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.AllowFragments) as? NSDictionary {
-                        if let foursquareVenues = foursquareObject["response"]?["venues"] {
-                            if let venueNames = foursquareVenues?.valueForKey("name") {
-                                return venueNames as! Array<String>
-                            }
-                        }
-                    }
-                } catch {
-                    NSLog("Error serializing Foursquare data:\(error)")
-                }
-                return [String]()
+                return wwfss.venueNamesForResponseData(data)
             }
             .observeOn(UIScheduler())
         
@@ -53,7 +39,5 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
 }
 
